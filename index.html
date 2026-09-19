@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fieldnote: an interactive, scripted mobile product concept by Pururin.">
+  <title>Fieldnote — interactive concept</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header><button class="icon" id="back" hidden aria-label="Back"><svg viewBox="0 0 24 24"><path d="M20 12H4m7-7-7 7 7 7"/></svg></button><span class="brand">Fieldnote</span><span class="concept">Interactive concept</span></header>
+    <section id="welcome" class="screen">
+      <h1>Capture the experiment.<br>Keep the evidence.</h1>
+      <p class="intro">Turn rough notes into a record you can check and keep.</p>
+      <ol class="steps"><li><span>01</span>Capture your notes</li><li><span>02</span>Review the details</li><li><span>03</span>Save your record</li></ol>
+      <aside class="tint sample"><div class="label">Sample note <svg viewBox="0 0 24 24"><path d="M9 5H6v16h13V5h-3M9 3h7v4H9zM9 11h7m-7 4h7"/></svg></div><p>Copper sample. Heated from 22°C to 42°C in 120 seconds. Mass: 50 g.</p></aside>
+      <div class="actions"><button class="primary arrow" id="sample">Try the sample <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button><button class="secondary" id="own">Start with your own note</button></div>
+      <footer>Scripted demo · No account needed</footer>
+    </section>
+    <section id="capture" class="screen" hidden>
+      <h1>What did you observe?</h1>
+      <div id="transcript" aria-live="polite">
+        <div id="user-message" class="message user" hidden><span>You</span><p id="source-note"></p></div>
+        <div class="message assistant"><span>Fieldnote</span><p id="prompt"></p></div>
+        <div id="method-choices" class="choices" hidden><button data-method="Thermocouple">Thermocouple</button><button data-method="IR sensor">IR sensor</button><button data-method="Not recorded">Not recorded</button></div>
+      </div>
+      <form class="composer" id="note-form"><label class="sr-only" for="note">Add a note</label><textarea id="note" rows="2" placeholder="Add a note…" maxlength="3000" required></textarea><button class="icon" aria-label="Send note"><svg viewBox="0 0 24 24"><path d="m3 10 18-7-7 18-3-8-8-3Zm8 3L21 3"/></svg></button></form>
+      <footer>Scripted demo · No data sent</footer>
+    </section>
+    <section id="review" class="screen" hidden>
+      <h1>Ready for review.</h1><p class="record-title" id="record-title">Heating copper</p>
+      <dl id="details"></dl>
+      <aside class="tint result"><span class="label">Derived result</span><div>Temperature change <strong id="delta"></strong></div><small>Calculated from the recorded temperatures.</small></aside>
+      <div class="actions"><button class="primary arrow" id="save">Save record <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></button><button class="secondary" id="edit">Edit details</button></div>
+      <footer>Scripted demo · Check before use</footer>
+    </section>
+    <section id="edit-screen" class="screen" hidden>
+      <h1>Keep the details true.</h1><p class="intro">Leave a field empty if it was not recorded. Values use the units shown.</p>
+      <form id="details-form">
+        <label>Title<input name="title" maxlength="80" required></label>
+        <label>Material<input name="material" maxlength="80"></label>
+        <div class="form-row"><label>Mass (g)<input name="mass" type="number" min="0.000001" step="any"></label><label>Duration (s)<input name="duration" type="number" min="0" step="any"></label></div>
+        <div class="form-row"><label>Start (°C)<input name="start" type="number" step="any"></label><label>End (°C)<input name="end" type="number" step="any"></label></div>
+        <label>Method<input name="method" maxlength="100"></label>
+        <button class="primary" type="submit">Review changes</button>
+      </form><footer>Scripted demo · No automatic extraction</footer>
+    </section>
+    <section id="saved" class="screen" hidden>
+      <div class="saved-symbol"><svg viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></div>
+      <h1>A record you can keep.</h1><p class="intro" id="save-status" role="status"></p>
+      <div class="tint saved-summary"><span class="label">Saved record</span><h2 id="saved-title"></h2><p id="saved-summary"></p></div>
+      <div class="actions"><button class="primary arrow" id="download">Download Markdown <svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></button><button class="secondary" id="return-review">Back to record</button><button class="plain" id="restart">Start another note</button></div>
+      <footer>Stored locally · No cloud account</footer>
+    </section>
+  </main>
+  <script src="app.js" type="module"></script>
+</body>
+</html>
